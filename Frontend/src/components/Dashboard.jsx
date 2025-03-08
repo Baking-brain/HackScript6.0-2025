@@ -29,7 +29,20 @@ const Dashboard = () => {
   return (
     <div className="dashboard-container">
       <div className="header-section">
-        <h1>QA-BOT Voice Agent Analyzer</h1>
+        <div className="header-content">
+          <h1>QA-BOT Voice Agent Analyzer</h1>
+          <div className="theme-toggle-container">
+            <label className="switch">
+              <input 
+                type="checkbox" 
+                checked={darkMode} 
+                onChange={toggleTheme} 
+              />
+              <span className="slider round"></span>
+            </label>
+            <span className="toggle-label">{darkMode ? 'Dark Mode' : 'Light Mode'}</span>
+          </div>
+        </div>
       </div>
 
       <div className="upload-section">
