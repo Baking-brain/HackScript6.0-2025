@@ -86,6 +86,7 @@ const Dashboard = () => {
             <h3>Overall Sentiment</h3>
             <p className="metric-value">Positive</p>
           </div>
+          
           <div className="metric-card">
             <h3>Compliance</h3>
             <p className="metric-value">98%</p>
