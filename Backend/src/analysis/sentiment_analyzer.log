@@ -1,0 +1,6 @@
+2025-03-08 17:38:01,766 - audio_sentiment - INFO - Loading Whisper model: base
+2025-03-08 17:38:02,487 - audio_sentiment - INFO - Loading Named Entity Recognition (NER) model
+2025-03-08 17:38:07,259 - tensorflow - WARNING - From C:\Users\91935\AppData\Roaming\Python\Python312\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+2025-03-08 17:38:07,708 - audio_sentiment - INFO - Processing audio.wav
+2025-03-08 17:38:12,450 - audio_sentiment - INFO - Processed audio.wav successfully. Results saved to results\json\audio.json
