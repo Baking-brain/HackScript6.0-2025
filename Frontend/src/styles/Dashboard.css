@@ -11,6 +11,45 @@
     --danger-color: #e74c3c;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --border-radius: 8px;
+
+    /* Light theme (default) */
+    --bg-color: #f5f7fa;
+    --text-color: #333;
+    --card-bg: white;
+    --header-bg: var(--secondary-color);
+    --header-text: white;
+    --metric-card-bg: var(--light-gray);
+    --border-color: #ddd;
+}
+
+/* Dark theme variables - improved contrast and vibrancy */
+.dark-theme {
+    --bg-color: #121212;
+    --text-color: #ffffff;
+    --card-bg: #1e1e1e;
+    --header-bg: #325a7d;
+    /* Changed from #000000 to a dark blue-gray */
+    --header-text: #ffffff;
+    --metric-card-bg: #3c3b3b;
+    /* Slightly lighter gray for better visibility */
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --border-color: #333;
+
+    /* Enhanced colors for dark mode */
+    --primary-color: #4dabf7;
+    /* Brighter blue */
+    --success-color: #51cf66;
+    /* Brighter green */
+    --warning-color: #fcc419;
+    /* Brighter yellow */
+    --danger-color: #ff6b6b;
+    /* Brighter red */
+    --dark-gray: #4b4c4e;
+    --dense-white:rgb(218, 212, 212);
+
+    /* Lighter gray for better visibility */
+    --medium-gray: #868e96;
+    /* Adjusted medium gray */
 }
 
 * {
@@ -21,8 +60,9 @@
 
 body {
     font-family: 'Roboto', Arial, sans-serif;
-    background-color: #f5f7fa;
-    color: #333;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .dashboard-container {
@@ -32,21 +72,94 @@ body {
 }
 
 .header-section {
-    background-color: var(--secondary-color);
-    color: white;
+    background-color: var(--header-bg);
+    color: var(--header-text);
     padding: 20px;
     border-radius: var(--border-radius);
     margin-bottom: 20px;
-    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Theme Toggle Styles */
+.theme-toggle-container {
+    display: flex;
+    align-items: center;
+}
+
+.toggle-label {
+    margin-left: 10px;
+    font-size: 0.9rem;
+}
+
+/* Switch styling */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: var(--primary-color);
+}
+
+input:checked+.slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 24px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }
 
 /* Upload Section Styles */
 .upload-section {
-    background-color: white;
+    background-color: var(--card-bg);
     padding: 20px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .audio-uploader {
@@ -80,7 +193,7 @@ body {
 }
 
 .upload-text {
-    color: var(--dark-gray);
+    color: var(--text-color);
 }
 
 .upload-hint {
@@ -95,9 +208,9 @@ body {
 
 /* Uploaded File Container Styles */
 .uploaded-file-container {
-    background-color: white;
+    background-color: var(--card-bg);
     border-radius: var(--border-radius);
-    border: 1px solid var(--light-gray);
+    border: 1px solid var(--border-color);
     padding: 20px;
     transition: all 0.3s ease;
 }
@@ -121,7 +234,7 @@ body {
 .uploaded-file-name {
     font-size: 1.1rem;
     margin-bottom: 5px;
-    color: var(--secondary-color);
+    color: var(--text-color);
     word-break: break-all;
 }
 
@@ -195,17 +308,19 @@ body {
 }
 
 .graph-card {
-    background-color: white;
+    background-color: var(--card-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     padding: 20px;
     flex: 1;
+    transition: background-color 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .graph-card h2 {
     margin-bottom: 15px;
     font-size: 1.2rem;
-    color: var(--secondary-color);
+    color: var(--text-color);
 }
 
 .tone-graph {
@@ -215,7 +330,7 @@ body {
 
 .placeholder-graph {
     height: 100%;
-    border: 1px solid var(--light-gray);
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
@@ -243,14 +358,14 @@ body {
 .graph-line {
     height: 1px;
     width: 100%;
-    background-color: var(--light-gray);
+    background-color: var(--border-color);
 }
 
 .graph-legend {
     display: flex;
     justify-content: center;
     padding: 10px;
-    border-top: 1px solid var(--light-gray);
+    border-top: 1px solid var(--border-color);
 }
 
 .legend-item {
@@ -284,16 +399,18 @@ body {
 }
 
 .timestamps-card {
-    background-color: white;
+    background-color: var(--card-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     padding: 20px;
+    transition: background-color 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .timestamps-card h2 {
     margin-bottom: 15px;
     font-size: 1.2rem;
-    color: var(--secondary-color);
+    color: var(--text-color);
 }
 
 .audio-timeline {
@@ -304,7 +421,7 @@ body {
 
 .timeline-track {
     height: 6px;
-    background-color: var(--light-gray);
+    background-color: var(--border-color);
     border-radius: 3px;
     position: absolute;
     top: 50%;
@@ -316,23 +433,28 @@ body {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background-color: var(--primary-color);
     cursor: pointer;
+    /* Add a subtle glow effect in dark mode */
+    box-shadow: 0 0 4px var(--primary-color);
 }
 
 .flag-marker.high {
     background-color: var(--danger-color);
+    box-shadow: 0 0 4px var(--danger-color);
 }
 
 .flag-marker.medium {
     background-color: var(--warning-color);
+    box-shadow: 0 0 4px var(--warning-color);
 }
 
 .flag-marker.low {
     background-color: var(--primary-color);
+    box-shadow: 0 0 4px var(--primary-color);
 }
 
 .flag-tooltip {
@@ -362,6 +484,7 @@ body {
 .flagged-list h3 {
     margin-bottom: 10px;
     font-size: 1rem;
+    color: var(--text-color);
 }
 
 .flags-table {
@@ -373,7 +496,7 @@ body {
 .flags-table td {
     padding: 10px;
     text-align: left;
-    border-bottom: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .flags-table th {
@@ -388,42 +511,63 @@ tr.severity-high td {
 tr.severity-medium td {
     color: var(--warning-color);
 }
-
 /* Metrics Section Styles */
 .metrics-section {
-    background-color: white;
+    background-color: var(--card-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
     padding: 20px;
+    transition: background-color 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .metrics-section h2 {
     margin-bottom: 15px;
     font-size: 1.2rem;
-    color: var(--secondary-color);
+    color: var(--text-color);
 }
 
 .metrics-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* Space out the cards */
     gap: 15px;
 }
 
 .metric-card {
-    background-color: var(--light-gray);
+    background-color: var(--metric-card-bg);
     border-radius: var(--border-radius);
     padding: 15px;
     text-align: center;
+    transition: background-color 0.3s ease;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    flex: 1 1 200px;
+    /* Ensures responsiveness */
+    min-width: 200px;
+    /* Prevents cards from shrinking too much */
+}
+
+/* Ensure colors remain the same in dark mode */
+.dark-theme .metric-card {
+    background-color: var(--metric-card-bg);
+    border: 1px solid var(--border-color);
 }
 
 .metric-card h3 {
     font-size: 0.9rem;
     margin-bottom: 5px;
-    color: var(--dark-gray);
+    color: var(--dense-white);
 }
 
 .metric-value {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.dark-theme .metric-card h3,
+.dark-theme .metric-value {
+    color: var(--dense-white);
 }
