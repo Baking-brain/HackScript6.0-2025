@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 const AudioUploader = ({ onUpload }) => {
   const [dragActive, setDragActive] = useState(false);
+  const [uploadedFile, setUploadedFile] = useState(null);
   
   const handleDrag = (e) => {
     e.preventDefault();
@@ -20,43 +21,87 @@ const AudioUploader = ({ onUpload }) => {
     setDragActive(false);
     
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      onUpload(e.dataTransfer.files[0]);
+      const file = e.dataTransfer.files[0];
+      handleFileUpload(file);
     }
   };
   
   const handleChange = (e) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
-      onUpload(e.target.files[0]);
+      const file = e.target.files[0];
+      handleFileUpload(file);
     }
+  };
+  
+  const handleFileUpload = (file) => {
+    setUploadedFile(file);
+    onUpload(file);
+  };
+  
+  const handleRemoveFile = () => {
+    setUploadedFile(null);
+    onUpload(null);
   };
   
   return (
     <div className="audio-uploader">
-      <form 
-        className={`upload-form ${dragActive ? 'active' : ''}`} 
-        onDragEnter={handleDrag}
-        onDragLeave={handleDrag}
-        onDragOver={handleDrag}
-        onDrop={handleDrop}
-      >
-        <input 
-          type="file" 
-          id="upload-file" 
-          accept="audio/*" 
-          onChange={handleChange} 
-          className="input-file"
-        />
-        <label htmlFor="upload-file" className="upload-label">
-          <div className="upload-icon">
-            <i className="fas fa-cloud-upload-alt"></i>
+      {!uploadedFile ? (
+        <form 
+          className={`upload-form ${dragActive ? 'active' : ''}`} 
+          onDragEnter={handleDrag}
+          onDragLeave={handleDrag}
+          onDragOver={handleDrag}
+          onDrop={handleDrop}
+        >
+          <input 
+            type="file" 
+            id="upload-file" 
+            accept="audio/*" 
+            onChange={handleChange} 
+            className="input-file"
+          />
+          <label htmlFor="upload-file" className="upload-label">
+            <div className="upload-icon">
+              <i className="fas fa-cloud-upload-alt"></i>
+            </div>
+            <div className="upload-text">
+              <p>Drag and drop audio file here or click to upload</p>
+              <p className="upload-hint">Supports MP3, WAV, M4A formats</p>
+            </div>
+          </label>
+        </form>
+      ) : (
+        <div className="uploaded-file-container">
+          <div className="uploaded-file-details">
+            <div className="uploaded-file-icon">
+              <i className="fas fa-file-audio"></i>
+            </div>
+            <div className="uploaded-file-info">
+              <h3 className="uploaded-file-name">{uploadedFile.name}</h3>
+              <p className="uploaded-file-meta">
+                {(uploadedFile.size / 1024 / 1024).toFixed(2)} MB • 
+                {uploadedFile.type.split('/')[1].toUpperCase()}
+              </p>
+            </div>
+            <div className="uploaded-file-status">
+              <span className="status-badge success">Ready for Analysis</span>
+            </div>
           </div>
-          <div className="upload-text">
-            <p>Drag and drop audio file here or click to upload</p>
-            <p className="upload-hint">Supports MP3, WAV, M4A formats</p>
+          <div className="uploaded-file-actions">
+            <button 
+              className="remove-file-btn" 
+              onClick={handleRemoveFile}
+              type="button"
+            >
+              <i className="fas fa-times"></i> Remove
+            </button>
+            <button className="analyze-btn" type="button">
+              <i className="fas fa-chart-line"></i> Start Analysis
+            </button>
           </div>
-        </label>
-      </form>
+        </div>
+      )}
     </div>
   );
 };

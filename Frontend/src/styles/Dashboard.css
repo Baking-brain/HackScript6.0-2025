@@ -93,6 +93,96 @@ body {
     display: none;
 }
 
+/* Uploaded File Container Styles */
+.uploaded-file-container {
+    background-color: white;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--light-gray);
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.uploaded-file-details {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.uploaded-file-icon {
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-right: 15px;
+}
+
+.uploaded-file-info {
+    flex: 1;
+}
+
+.uploaded-file-name {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: var(--secondary-color);
+    word-break: break-all;
+}
+
+.uploaded-file-meta {
+    font-size: 0.85rem;
+    color: var(--dark-gray);
+}
+
+.uploaded-file-status {
+    margin-left: 15px;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-badge.success {
+    background-color: rgba(46, 204, 113, 0.15);
+    color: var(--success-color);
+}
+
+.uploaded-file-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.remove-file-btn {
+    padding: 8px 15px;
+    background-color: transparent;
+    color: var(--dark-gray);
+    border: 1px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.remove-file-btn:hover {
+    background-color: rgba(127, 140, 141, 0.1);
+}
+
+.analyze-btn {
+    padding: 8px 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.analyze-btn:hover {
+    background-color: #2980b9;
+}
+
 /* Graphs Section Styles */
 .graphs-section {
     margin-bottom: 20px;
