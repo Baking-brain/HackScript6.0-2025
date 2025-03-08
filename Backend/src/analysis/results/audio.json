@@ -1,0 +1,27 @@
+{
+    "file": "audio.wav",
+    "conversation": [
+        {
+            "speaker": "Bot",
+            "text": " So first you want to research what library you are going to use for graphs and then you have to decide which is the best one and then you have to fetch like you have to tell them that you are fetching dynamic data from backend and then you have to search how to display that data and then you will also have to create components about various parameters for the what like there's the sentiment score.",
+            "sentiment": {
+                "positive": 0.179,
+                "neutral": 0.821,
+                "negative": 0.0,
+                "compound": 0.9255,
+                "label": "Positive"
+            }
+        },
+        {
+            "speaker": "Human",
+            "text": " There's the sentiment score for the user and then how much time has been passed how much time it is taking for the bot to answer these are all values will be fetched from database but you have to create components should display that.",
+            "sentiment": {
+                "positive": 0.097,
+                "neutral": 0.903,
+                "negative": 0.0,
+                "compound": 0.5423,
+                "label": "Positive"
+            }
+        }
+    ]
+}

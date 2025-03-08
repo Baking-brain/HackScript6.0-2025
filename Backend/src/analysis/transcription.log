@@ -1,0 +1,6 @@
+2025-03-08 18:43:45,855 - audio_transcription - INFO - Loading Whisper model: base
+2025-03-08 18:43:46,488 - audio_transcription - INFO - Processing audio.wav
+2025-03-08 18:43:52,027 - audio_transcription - INFO - Processed audio.wav successfully. Results saved to transcriptions\audio.json
+2025-03-08 18:48:00,980 - audio_transcription - INFO - Loading Whisper model: base
+2025-03-08 18:48:01,561 - audio_transcription - INFO - Processing audio.wav
+2025-03-08 18:48:05,717 - audio_transcription - INFO - Processed audio.wav successfully. Results saved to transcriptions\audio.json
