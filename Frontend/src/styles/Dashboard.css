@@ -1,0 +1,339 @@
+/* src/styles/Dashboard.css */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --accent-color: #e74c3c;
+    --light-gray: #ecf0f1;
+    --medium-gray: #bdc3c7;
+    --dark-gray: #7f8c8d;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --border-radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+}
+
+.dashboard-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header-section {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Upload Section Styles */
+.upload-section {
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+}
+
+.audio-uploader {
+    width: 100%;
+}
+
+.upload-form {
+    border: 2px dashed var(--medium-gray);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.upload-form.active {
+    border-color: var(--primary-color);
+    background-color: rgba(52, 152, 219, 0.05);
+}
+
+.upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.upload-icon {
+    font-size: 48px;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.upload-text {
+    color: var(--dark-gray);
+}
+
+.upload-hint {
+    font-size: 0.8rem;
+    margin-top: 10px;
+    color: var(--medium-gray);
+}
+
+.input-file {
+    display: none;
+}
+
+/* Graphs Section Styles */
+.graphs-section {
+    margin-bottom: 20px;
+}
+
+.tone-graphs {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.graph-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+    flex: 1;
+}
+
+.graph-card h2 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+}
+
+.tone-graph {
+    height: 250px;
+    width: 100%;
+}
+
+.placeholder-graph {
+    height: 100%;
+    border: 1px solid var(--light-gray);
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-direction: column;
+}
+
+.graph-placeholder {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--medium-gray);
+    position: relative;
+}
+
+.graph-lines {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.graph-line {
+    height: 1px;
+    width: 100%;
+    background-color: var(--light-gray);
+}
+
+.graph-legend {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-top: 1px solid var(--light-gray);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.legend-color.positive {
+    background-color: var(--success-color);
+}
+
+.legend-color.neutral {
+    background-color: var(--medium-gray);
+}
+
+.legend-color.negative {
+    background-color: var(--danger-color);
+}
+
+/* Timestamps Section Styles */
+.timestamps-section {
+    margin-bottom: 20px;
+}
+
+.timestamps-card {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+}
+
+.timestamps-card h2 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+}
+
+.audio-timeline {
+    height: 60px;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-track {
+    height: 6px;
+    background-color: var(--light-gray);
+    border-radius: 3px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.flag-marker {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.flag-marker.high {
+    background-color: var(--danger-color);
+}
+
+.flag-marker.medium {
+    background-color: var(--warning-color);
+}
+
+.flag-marker.low {
+    background-color: var(--primary-color);
+}
+
+.flag-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.flag-marker:hover .flag-tooltip {
+    opacity: 1;
+}
+
+.flagged-list {
+    margin-top: 20px;
+}
+
+.flagged-list h3 {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.flags-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.flags-table th,
+.flags-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.flags-table th {
+    color: var(--dark-gray);
+    font-weight: 500;
+}
+
+tr.severity-high td {
+    color: var(--danger-color);
+}
+
+tr.severity-medium td {
+    color: var(--warning-color);
+}
+
+/* Metrics Section Styles */
+.metrics-section {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 20px;
+}
+
+.metrics-section h2 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: var(--secondary-color);
+}
+
+.metrics-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.metric-card {
+    background-color: var(--light-gray);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    text-align: center;
+}
+
+.metric-card h3 {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: var(--dark-gray);
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
