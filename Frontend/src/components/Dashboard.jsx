@@ -1,31 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import '../styles/Dashboard.css';
-import AudioUploader from './AudioUploader';
-import ToneGraph from './ToneGraph';
-import FlagTimestamps from './FlagTimestamps';
+// src/components/Dashboard.jsx
+import React, { useState } from "react";
+import "../styles/Dashboard.css";
+import AudioUploader from "./AudioUploader";
+import ToneGraph from "./ToneGraph";
+import FlagTimestamps from "./FlagTimestamps";
+import { useEffect } from "react";
+import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const Dashboard = () => {
   const [audioFile, setAudioFile] = useState(null);
-  const [darkMode, setDarkMode] = useState(false);
-  
+
   const handleAudioUpload = (file) => {
     setAudioFile(file);
-    // In a real implementation, you would process the audio file here
   };
 
-  // Toggle theme function
-  const toggleTheme = () => {
-    setDarkMode(!darkMode);
-  };
+  // useEffect(() => {
+  //   async function upLoad(params) {
+  //     console.log(apiUrl);
 
-  // Apply theme class to document body when theme changes
-  useEffect(() => {
-    if (darkMode) {
-      document.body.classList.add('dark-theme');
-    } else {
-      document.body.classList.remove('dark-theme');
-    }
-  }, [darkMode]);
+  //     await axios.get(apiUrl + "/api/test").then((response) => {
+  //       console.log(response.data);
+  //     });
+  //   }
+  //   upLoad();
+  // }, []);
 
   return (
     <div className="dashboard-container">
@@ -45,24 +44,24 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="upload-section">
         <AudioUploader onUpload={handleAudioUpload} />
       </div>
-      
+
       <div className="graphs-section">
         <div className="tone-graphs">
           <div className="graph-card">
             <h2>Agent Tone Analysis</h2>
             <ToneGraph id="agent-tone" />
           </div>
-          
+
           <div className="graph-card">
             <h2>Customer Sentiment Analysis</h2>
             <ToneGraph id="customer-sentiment" />
           </div>
         </div>
-        
+
         <div className="timestamps-section">
           <div className="timestamps-card">
             <h2>Call Flagged Timestamps</h2>
@@ -70,7 +69,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      
+
       <div className="metrics-section">
         <h2>Performance Metrics</h2>
         <div className="metrics-cards">

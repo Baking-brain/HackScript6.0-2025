@@ -1,31 +1,33 @@
 // src/components/AudioUploader.jsx
-import React, { useState } from 'react';
+import axios from "axios";
+import React, { useState } from "react";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const AudioUploader = ({ onUpload }) => {
   const [dragActive, setDragActive] = useState(false);
   const [uploadedFile, setUploadedFile] = useState(null);
-  
+
   const handleDrag = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (e.type === 'dragenter' || e.type === 'dragover') {
+    if (e.type === "dragenter" || e.type === "dragover") {
       setDragActive(true);
-    } else if (e.type === 'dragleave') {
+    } else if (e.type === "dragleave") {
       setDragActive(false);
     }
   };
-  
+
   const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    
+
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const file = e.dataTransfer.files[0];
       handleFileUpload(file);
     }
   };
-  
+
   const handleChange = (e) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
@@ -33,32 +35,55 @@ const AudioUploader = ({ onUpload }) => {
       handleFileUpload(file);
     }
   };
-  
+
   const handleFileUpload = (file) => {
     setUploadedFile(file);
     onUpload(file);
   };
-  
+
   const handleRemoveFile = () => {
     setUploadedFile(null);
     onUpload(null);
   };
-  
+
+  const handleStartAnalysis = async () => {
+    if (!uploadedFile) {
+      alert("Select a file...");
+    }
+
+    const formData = new FormData();
+    formData.append("audioFile", uploadedFile);
+
+    await axios
+      .post(apiUrl + "/api/upload_file", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        alert("Success");
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
+  };
+
   return (
     <div className="audio-uploader">
       {!uploadedFile ? (
-        <form 
-          className={`upload-form ${dragActive ? 'active' : ''}`} 
+        <form
+          className={`upload-form ${dragActive ? "active" : ""}`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
           onDragOver={handleDrag}
           onDrop={handleDrop}
         >
-          <input 
-            type="file" 
-            id="upload-file" 
-            accept="audio/*" 
-            onChange={handleChange} 
+          <input
+            type="file"
+            id="upload-file"
+            accept="audio/*"
+            onChange={handleChange}
             className="input-file"
           />
           <label htmlFor="upload-file" className="upload-label">
@@ -80,8 +105,8 @@ const AudioUploader = ({ onUpload }) => {
             <div className="uploaded-file-info">
               <h3 className="uploaded-file-name">{uploadedFile.name}</h3>
               <p className="uploaded-file-meta">
-                {(uploadedFile.size / 1024 / 1024).toFixed(2)} MB • 
-                {uploadedFile.type.split('/')[1].toUpperCase()}
+                {(uploadedFile.size / 1024 / 1024).toFixed(2)} MB •
+                {uploadedFile.type.split("/")[1].toUpperCase()}
               </p>
             </div>
             <div className="uploaded-file-status">
@@ -89,14 +114,18 @@ const AudioUploader = ({ onUpload }) => {
             </div>
           </div>
           <div className="uploaded-file-actions">
-            <button 
-              className="remove-file-btn" 
+            <button
+              className="remove-file-btn"
               onClick={handleRemoveFile}
               type="button"
             >
               <i className="fas fa-times"></i> Remove
             </button>
-            <button className="analyze-btn" type="button">
+            <button
+              className="analyze-btn"
+              type="button"
+              onClick={handleStartAnalysis}
+            >
               <i className="fas fa-chart-line"></i> Start Analysis
             </button>
           </div>
